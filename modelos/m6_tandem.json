@@ -1,0 +1,30 @@
+{
+  "nome": "M6 | Duas filas em tandem",
+  "semente": 8,
+  "aleatorios": 100000,
+  "gerador": { "a": 1664525, "c": 1013904223, "M": 4294967296 },
+
+  "chegadas": [
+    { "fila": "Fila 1", "tempo": 2.5 }
+  ],
+
+  "filas": [
+    {
+      "nome": "Fila 1",
+      "servidores": 2,
+      "capacidade": 3,
+      "chegada": [1, 5],
+      "atendimento": [4, 5],
+      "roteamento": [
+        { "destino": "Fila 2", "probabilidade": 1.0 }
+      ]
+    },
+    {
+      "nome": "Fila 2",
+      "servidores": 1,
+      "capacidade": 5,
+      "atendimento": [1, 3],
+      "roteamento": []
+    }
+  ]
+}

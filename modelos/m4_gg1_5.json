@@ -1,0 +1,10 @@
+{
+  "nome": "M4 | Fila simples G/G/1/5 (chegadas 3..5, atendimento 4..5)",
+  "semente": 8,
+  "aleatorios": 100000,
+  "chegadas": [ { "fila": "Fila 1", "tempo": 3.0 } ],
+  "filas": [
+    { "nome": "Fila 1", "servidores": 1, "capacidade": 5,
+      "chegada": [3, 5], "atendimento": [4, 5], "roteamento": [] }
+  ]
+}
