@@ -190,6 +190,11 @@ class Simulador:
             origem = self.filas[f["nome"]]
             total = 0.0
             for r in f.get("roteamento", []):
+                if r["destino"] not in self.filas:
+                    raise ValueError(
+                        "A fila '{}' roteia para '{}', que nao existe no modelo.".format(
+                            f["nome"], r["destino"])
+                    )
                 destino = self.filas[r["destino"]]
                 p = float(r["probabilidade"])
                 origem.roteamento.append((destino, p))
@@ -202,7 +207,18 @@ class Simulador:
 
         # --- chegadas externas iniciais ---
         for ch in modelo["chegadas"]:
+            if ch["fila"] not in self.filas:
+                raise ValueError(
+                    "Chegada inicial agendada para a fila '{}', que nao existe no "
+                    "modelo.".format(ch["fila"])
+                )
             destino = self.filas[ch["fila"]]
+            if destino.chegada is None:
+                raise ValueError(
+                    "A fila '{}' recebe chegada inicial mas nao tem o campo "
+                    "'chegada' (intervalo entre chegadas externas) no modelo.".format(
+                        destino.nome)
+                )
             self.escalonador.agenda(Evento(CHEGADA, float(ch["tempo"]), destino=destino))
 
     # -----------------------------------------------------------------

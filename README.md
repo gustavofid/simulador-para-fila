@@ -157,3 +157,22 @@ entrega anterior, o que garante que a generalização não quebrou nada.
 Cenário de validação do M6: **Fila 1** G/G/2/3 (chegadas 1..5, atendimento 4..5)
 → **Fila 2** G/G/1/5 (atendimento 1..3), filas inicialmente vazias, primeiro
 cliente em t = 2,5, parada em 100.000 pseudoaleatórios.
+
+## Cenários exigidos por módulo
+
+> **Atenção.** O arquivo modelo do M4 trazia rótulos com `chegadas 2..5, atendimento 3..5`,
+> mas o **enunciado do módulo** pedia `chegadas 3..5, atendimento 4..5`. A primeira entrega
+> foi feita com o cenário errado, e foi isso — não o algoritmo — que gerou a divergência
+> apontada no feedback do professor. Os modelos abaixo deixam os dois casos explícitos.
+
+| Modelo | Cenário | Origem |
+|---|---|---|
+| `m4_gg1_5.json` / `m4_gg2_5.json` | chegadas 3..5, atendimento 4..5 | **enunciado do M4** |
+| `m4_gg1_5_modelo.json` / `m4_gg2_5_modelo.json` | chegadas 2..5, atendimento 3..5 | rótulos do arquivo modelo |
+| `m6_tandem.json` | Fila 1 G/G/2/3 (1..5 / 4..5) → Fila 2 G/G/1/5 (1..3), t₀ = 2,5 | **enunciado do M6** |
+
+Conferido contra a referência do professor para o cenário do M4 (G/G/1/5, 3..5 / 4..5):
+47,90 % / 51,72 % nos estados 4 e 5 contra 48,13 % / 51,46 % aqui, 5.865 contra 5.893 perdas,
+tempo global 211.717,30 contra 211.797,88. A diferença residual é a sequência de
+pseudoaleatórios — cai dentro da dispersão medida em 240 execuções variando LCG e semente.
+
